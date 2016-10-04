@@ -56,6 +56,10 @@ gem 'spring',        group: :development
 
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 
+group :development, :test do
+  gem 'rspec', '~> 3.0'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
