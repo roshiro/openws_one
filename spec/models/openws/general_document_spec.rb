@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Openws::GeneralDocument do
   describe '.set_collection_name' do
