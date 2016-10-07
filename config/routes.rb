@@ -53,5 +53,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  resources :general_documents, path: '/collections'
+  # resources :general_documents, path: '/collections'
+  match 'collections/:collection_name', to: 'general_documents#create', via: [:post]
 end
