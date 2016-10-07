@@ -14,4 +14,22 @@ describe GeneralDocumentsController do
       expect(response).to be_success
     end
   end
+
+  describe '#create' do
+    describe 'for a valid JSON body' do
+      it 'returns success response' do
+        # post :create, id: 
+      end
+
+      it 'persists the given JSON' do
+
+      end
+    end
+
+    describe 'for invalid JSON body' do
+      it 'returns error response' do
+
+      end
+    end
+  end
 end
