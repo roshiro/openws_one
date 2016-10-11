@@ -55,4 +55,5 @@ Rails.application.routes.draw do
   #   end
   # resources :general_documents, path: '/collections'
   match 'collections/:collection_name', to: 'general_documents#create', via: [:post]
+  match 'collections/:collection_name', to: 'general_documents#show', via: [:get]
 end

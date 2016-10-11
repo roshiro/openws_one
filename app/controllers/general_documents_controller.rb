@@ -11,14 +11,20 @@ class GeneralDocumentsController < ApplicationController
     end
   end
 
+  def show
+    render json: {
+      items: Openws::GeneralDocument.with(collection: params[:collection_name]).all
+    }
+  end
+
   private
 
   def persist_in_collection(coll_name)
     raise 'JSON cannot be empty' if JSON.parse(request.body.read).empty?
 
     Openws::GeneralDocument
-      .set_collection_name(coll_name)
       .new(JSON.parse(request.body.read))
+      .with(collection: coll_name)
       .save!
   end
 end
