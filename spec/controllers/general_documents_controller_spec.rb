@@ -91,4 +91,33 @@ describe GeneralDocumentsController do
       end
     end
   end
+
+  describe '#search_by_id' do
+    let(:expected_obj) { { name: 'Random Product' } }
+
+    before :each do
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods').and_return document
+      allow(document).to receive(:find).with("109").and_return expected_obj
+      allow(document).to receive(:find).with("9898").and_raise(Mongoid::Errors::DocumentNotFound)
+    end
+
+    describe 'when ID is found' do
+      it 'returns the JSON object' do
+        get :search_by_id, collection_name: 'my_prods', id: 109
+        expect(response.body).to eq expected_obj.to_json
+      end
+
+      it 'returns status 200' do
+        get :search_by_id, collection_name: 'my_prods', id: 109
+        expect(response.status).to eq 200
+      end
+    end
+
+    describe 'when ID is not found' do
+      it 'returns status 404' do
+        get :search_by_id, collection_name: 'my_prods', id: 9898
+        expect(response.status).to eq 404
+      end
+    end
+  end
 end

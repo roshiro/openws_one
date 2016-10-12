@@ -24,6 +24,15 @@ class GeneralDocumentsController < ApplicationController
     end
   end
 
+  def search_by_id
+    begin
+      result = Openws::GeneralDocument.with(collection: params[:collection_name]).find(params[:id])
+      render json: result, status: 200
+    rescue => e
+      render json: { msg: 'Document not found' }, status: 404
+    end
+  end
+
   private
 
   def persist_in_collection(coll_name)
