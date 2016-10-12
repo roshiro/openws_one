@@ -1,5 +1,8 @@
 # Controller to handle General Document actions
 class GeneralDocumentsController < ApplicationController
+  # Receive calls without passing CSRF token
+  protect_from_forgery with: :null_session
+
   def create
     begin
       created_object = persist_in_collection(params[:collection_name])
