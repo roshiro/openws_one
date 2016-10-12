@@ -12,9 +12,13 @@ class GeneralDocumentsController < ApplicationController
   end
 
   def show
-    render json: {
-      items: Openws::GeneralDocument.with(collection: params[:collection_name]).all
-    }
+    if Openws::GeneralDocument.with(collection: params[:collection_name]).exists?
+      render json: {
+        items: Openws::GeneralDocument.with(collection: params[:collection_name]).all
+      }
+    else
+      render json: { msg: 'Invalid collection' }, status: 400
+    end
   end
 
   private

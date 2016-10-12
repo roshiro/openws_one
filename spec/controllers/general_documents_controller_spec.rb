@@ -62,10 +62,14 @@ describe GeneralDocumentsController do
         { key3: 'random3' }
       ]
     end
+    let(:doc_not_exist) { double("DocNotExist") }
 
     before :each do
-      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'todo_list').and_return Openws::GeneralDocument
-      allow(Openws::GeneralDocument).to receive_message_chain(:all).and_return items
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'non_existing_collection').and_return doc_not_exist
+      allow(doc_not_exist).to receive(:exists?).and_return false
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'todo_list').and_return document
+      allow(document).to receive(:exists?).and_return true
+      allow(document).to receive(:all).and_return items
     end
 
     describe 'when collection name exists' do
@@ -82,8 +86,8 @@ describe GeneralDocumentsController do
 
     describe 'when collection name does not exist' do
       it 'returns 400 status code' do
-        # get :show, collection_name: 'todo_list'
-        # expect(response.status).to eq 400
+        get :show, collection_name: 'non_existing_collection'
+        expect(response.status).to eq 400
       end
     end
   end
