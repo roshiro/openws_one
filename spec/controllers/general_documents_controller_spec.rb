@@ -120,4 +120,52 @@ describe GeneralDocumentsController do
       end
     end
   end
+
+  describe '#destroy' do
+    before :each do
+      allow(Openws::GeneralDocument).to receive(:with).with({collection: 'non_existing_collection'}).and_raise(Mongoid::Errors::DocumentNotFound, "Error")
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods').and_return document
+      allow(document).to receive(:where).with(id: 'existing_id').and_return document
+      allow(document).to receive(:where).with(id: 'non_existing_id').and_raise "error"
+      allow(document).to receive(:delete)
+    end
+
+    describe 'when collection name does not exist' do
+      it 'returns status 404' do
+        delete :destroy_by_id, collection_name: 'non_existing_collection', id: 'non_existing_id'
+        expect(response.status).to eq 404
+      end
+
+      it 'does not deletes any document' do
+        expect(document).not_to receive(:delete)
+        delete :destroy_by_id, collection_name: 'non_existing_collection', id: 'non_existing_id'
+      end
+    end
+
+    describe 'when ID does not exist' do
+      it 'returns status 404' do
+        delete :destroy_by_id, collection_name: 'my_prods', id: 'non_existing_id'
+        expect(response.status).to eq 404
+      end
+
+      it 'does not deletes any document' do
+        expect(document).not_to receive(:delete)
+        delete :destroy_by_id, collection_name: 'my_prods', id: 'non_existing_id'
+      end
+    end
+
+    describe 'when params are correct' do
+      it 'deletes the document' do
+        expect(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods')
+        expect(document).to receive(:where).with(id: 'existing_id')
+        expect(document).to receive(:delete)
+        delete :destroy_by_id, collection_name: 'my_prods', id: 'existing_id'
+      end
+
+      it 'returns status 201' do
+        delete :destroy_by_id, collection_name: 'my_prods', id: 'existing_id'
+        expect(response.status).to eq 201
+      end
+    end
+  end
 end

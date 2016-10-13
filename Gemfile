@@ -20,6 +20,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'minitest'
   gem 'thor'
+  gem 'byebug'
 end
 
 # Add support for the MySQL

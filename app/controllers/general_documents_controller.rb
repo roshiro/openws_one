@@ -33,6 +33,15 @@ class GeneralDocumentsController < ApplicationController
     end
   end
 
+  def destroy_by_id
+    begin
+      Openws::GeneralDocument.with({collection: params[:collection_name]}).where(id: params[:id]).delete
+      render json: nil, status: 201
+    rescue => e
+      render json: { msg: 'Document not found' }, status: 404
+    end
+  end
+
   private
 
   def persist_in_collection(coll_name)
