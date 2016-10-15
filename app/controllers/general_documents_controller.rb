@@ -3,6 +3,7 @@ class GeneralDocumentsController < ApplicationController
   # Receive calls without passing CSRF token
   protect_from_forgery with: :null_session
 
+  # Creates a document in the given collection.
   def create
     begin
       created_object = persist_in_collection(params[:collection_name])
@@ -14,6 +15,7 @@ class GeneralDocumentsController < ApplicationController
     end
   end
 
+  # Returns all the documents from the given collection
   def show
     if Openws::GeneralDocument.with(collection: params[:collection_name]).exists?
       render json: {
@@ -24,6 +26,7 @@ class GeneralDocumentsController < ApplicationController
     end
   end
 
+  # Returns the document from the given collection
   def search_by_id
     begin
       result = Openws::GeneralDocument.with(collection: params[:collection_name]).find(params[:id])
@@ -33,6 +36,7 @@ class GeneralDocumentsController < ApplicationController
     end
   end
 
+  # Destroys the document by ID.
   def destroy_by_id
     begin
       Openws::GeneralDocument.with({collection: params[:collection_name]}).where(id: params[:id]).delete
