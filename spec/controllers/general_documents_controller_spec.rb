@@ -22,6 +22,17 @@ describe GeneralDocumentsController do
       post :create, body, collection_name: 'my_prods'
     end
 
+    describe 'for invalid collection name' do
+      before :each do
+        allow(StorageValidations).to receive(:collection_name_valid?).with('employees+').and_return false
+      end
+
+      it 'returns 400 error code' do
+        post :create, body, collection_name: 'employees+'
+        expect(response.status).to eq(400)
+      end
+    end
+
     describe 'for a valid JSON body' do
       it 'returns code 201' do
         post :create, body, collection_name: 'my_prods'

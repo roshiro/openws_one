@@ -51,6 +51,8 @@ class GeneralDocumentsController < ApplicationController
   def persist_in_collection(coll_name)
     raise 'JSON cannot be empty' if JSON.parse(request.body.read).empty?
 
+    raise 'Invalid collection name' unless StorageValidations.collection_name_valid?(coll_name)
+
     Openws::GeneralDocument
       .new(JSON.parse(request.body.read))
       .with(collection: coll_name)
