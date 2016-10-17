@@ -21,6 +21,9 @@ group :development, :test do
   gem 'minitest'
   gem 'thor'
   gem 'byebug'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 # Add support for the MySQL
@@ -52,8 +55,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
 gem 'json', '1.8.2'
 
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
