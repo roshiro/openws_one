@@ -71,6 +71,8 @@ GEM
     origin (2.2.0)
     polyglot (0.3.5)
     rack (1.5.2)
+    rack-attack (5.0.1)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.4)
@@ -152,6 +154,7 @@ DEPENDENCIES
   json (= 1.8.2)
   minitest
   mongoid!
+  rack-attack
   rails (= 4.1.4)
   rake (~> 0.9.6)
   rspec-rails (~> 3.5)
