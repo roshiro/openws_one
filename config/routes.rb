@@ -53,8 +53,10 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  match 'collections/:collection_name', to: 'general_documents#create', via: [:post]
-  match 'collections/:collection_name', to: 'general_documents#show', via: [:get]
-  match 'collections/:collection_name/:id', to: 'general_documents#destroy_by_id', via: [:delete]
-  match 'collections/:collection_name/:id', to: 'general_documents#search_by_id', via: [:get]
+  scope '/api' do
+    match 'collections/:collection_name', to: 'general_documents#create', via: [:post]
+    match 'collections/:collection_name', to: 'general_documents#show', via: [:get]
+    match 'collections/:collection_name/:id', to: 'general_documents#destroy_by_id', via: [:delete]
+    match 'collections/:collection_name/:id', to: 'general_documents#search_by_id', via: [:get]
+  end
 end

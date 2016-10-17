@@ -8,8 +8,9 @@ class Rack::Attack
     '127.0.0.1' == req.ip || '::1' == req.ip
   end
 
-  # Throttle requests to 50 requests per second per ip
+  # Throttle requests to 50 requests per minute per IP address
+  # on routes under /api.
   throttle('req/ip', :limit => 50, :period => 1.minute) do |req|
-    req.path.starts_with?('/collections') && req.ip
+    req.path.starts_with?('/api') && req.ip
   end
 end
