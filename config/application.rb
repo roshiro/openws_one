@@ -27,5 +27,7 @@ module Rails4Example
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths << "#{Rails.root}/lib"
+
+    config.middleware.use Rack::Attack
   end
 end
