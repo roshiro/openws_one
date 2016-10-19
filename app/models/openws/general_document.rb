@@ -6,6 +6,6 @@ module Openws
     include Mongoid::Attributes::Dynamic
 
     # Store documents in general database
-    store_in database: 'general'
+    # store_in database: 'general'
   end
 end
