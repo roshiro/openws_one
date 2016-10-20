@@ -4,8 +4,5 @@ module Openws
   class GeneralDocument
     include Mongoid::Document
     include Mongoid::Attributes::Dynamic
-
-    # Store documents in general database
-    store_in database: 'general'
   end
 end
