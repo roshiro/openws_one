@@ -1,0 +1,42 @@
+header {
+  font-size: 2rem;
+}
+
+header .sub-title {
+  font-size: 0.8em;
+  width: 42%;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+
+#terminal {
+  background-color: #404040;
+  width: 600px;
+  color: #e8e8e8;
+  font-family: monaco;
+  font-size: 0.45em;
+  border-radius: 4px;
+  padding: 1em;
+  margin: 15px 0;
+  font-weight: 100;
+  height: 75px;
+  margin: auto;
+}
+
+body {
+  font-family: 'Neuton', serif;
+}
+
+.getting-started {
+  width: 740px;
+  margin: auto;
+}
+
+.center {
+  text-align: center;
+}
+
+.tm-cursor {
+  background-color: #e8e8e8;
+}
