@@ -31,7 +31,7 @@ class GeneralDocumentsController < ApplicationController
     begin
       result = Openws::GeneralDocument.with(collection: params[:collection_name]).find(params[:id])
       render json: result, status: 200
-    rescue => e
+    rescue
       render json: { msg: 'Document not found' }, status: 404
     end
   end
@@ -41,7 +41,7 @@ class GeneralDocumentsController < ApplicationController
     begin
       Openws::GeneralDocument.with({collection: params[:collection_name]}).where(id: params[:id]).delete
       render json: nil, status: 201
-    rescue => e
+    rescue
       render json: { msg: 'Document not found' }, status: 404
     end
   end
