@@ -22,8 +22,6 @@ class StorageValidations
     valid?(value)
   end
 
-  private
-
   def self.valid?(value, max_length = 40)
     /^([a-z0-9\-_]{2,#{max_length}})$/.match(value).nil? ? false : true
   end
