@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'faker'
 
 describe Rack::Attack do
   include Rack::Test::Methods
@@ -19,8 +20,9 @@ describe Rack::Attack do
     let(:limit) { 50 }
     context 'number of request is lower than limit' do
       it 'does not return code 429' do
+        ip = Faker::Internet.ip_v4_address
         limit.times do
-          get '/api/collections/my_coll_name', {}, 'REMOTE_ADDR' => '1.2.3.4'
+          get '/api/collections/my_coll_name', {}, 'REMOTE_ADDR' => ip
           expect(last_response.status).to_not eq(429)
         end
       end
@@ -28,8 +30,9 @@ describe Rack::Attack do
 
     context 'number of request is higher than limit' do
       it 'returns code 429' do
+        ip = Faker::Internet.ip_v4_address
         (limit + 10).times do |i|
-          get '/api/collections/my_coll_name', {}, 'REMOTE_ADDR' => "4.3.2.1"
+          get '/api/collections/my_coll_name', {}, 'REMOTE_ADDR' => ip
           expect(last_response.status).to eq(429) if i > limit
         end
       end
@@ -46,8 +49,9 @@ describe Rack::Attack do
 
     context 'not requesting API' do
       it 'does not return code 429' do
+        ip = Faker::Internet.ip_v4_address
         (limit + 10).times do
-          get '/', {}, 'REMOTE_ADDR' => '1.2.3.4'
+          get '/', {}, 'REMOTE_ADDR' => ip
           expect(last_response.status).to_not eq(429)
         end
       end
