@@ -7,26 +7,35 @@
   <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="landing-page.css">
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Neuton:700,400');
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
 </style>
 
 </head>
 <body class="landing-page">
   <div class="bg-white">
-    <header>
+    <header class="border-header">
       <div class="container">
         <div class="center">
-          <h1>The Public JSON Storage</h1>
+          <h1 class="title">The Public JSON Storage</h1>
 
           <p class="sub-title">
             Free, open-source service to store JSON data through a RESTFul API.
-            No signup or authentication needed.
+            <span>No signup or authentication needed.</span>
           </div>
         </div>
 
         <div class="getting-started">
-          <p>Getting started in one command</p>
-          <div id="terminal"></div>
+          <h3>Getting started in one command</h3>
+          <div id="terminal">
+            <div class="buttons">
+              <span class="circle red"></span>
+              <span class="circle yellow"></span>
+              <span class="circle green"></span>
+            </div>
+            <span class="code-comment">
+              # The command below saves `{ "name": "Testing" }` in the `books` collections.
+            </span>
+          </div>
         </div>
       </div>
     </header>
@@ -40,19 +49,19 @@
   <script src="terminal.min.js"></script>
   <script>
   var t = new Terminal({
-    dom: document.getElementById('terminal'), // required
-    speed: 15 // chars per second
+    dom: document.getElementById('terminal'),
+    speed: 25
   });
   t.run(function (o) {
-    o.output('Hi, there. I\'m Micoz. ').wait(300);
-    o.del(3).output('oz. ').wait(1000);
+    o.output('$> ').wait(100);
+    o.output('curl -X POST -H ').wait(300);
+    o.output('"Content-Type: application/json" -f').wait(200)
+    o.del(3).output(' -d \'{"name": "Testing"}\'  ').wait(100);
 
-    o.output('I want to show you an awesome simulator');
-    o.del(9).output('terminal powered by HTML4').wait(200).del(1).output('5. ').wait(800);
-
-    o.output('The terminal is a simulator with animation.').wait(800);
+    o.del(1).output('http://openws-roshiro.rhcloud.com').wait(200)
+    o.output('/api/collections/books').wait(200);
     o.newline();
-    o.output('-- Micooz');
+    o.output('$> ')
   });
   </script>
 </body>
