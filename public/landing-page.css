@@ -19,7 +19,7 @@ header h1.title {
 
 header .sub-title {
   font-size: 0.6em;
-  width: 42%;
+  width: 22em;
   right: 0;
   left: 0;
   margin: auto;
@@ -135,6 +135,9 @@ body {
   header {
     font-size: 1.5rem;
   }
+  .open-source .description {
+    float: none;
+  }
 }
 
 @media only screen and (max-width: 499px) {
@@ -144,4 +147,54 @@ body {
   #terminal {
     height: 13em;
   }
+  .open-source .description {
+    float: none;
+  }
+}
+
+main {
+  margin-top: 10em;
+  max-width: 740px;
+  margin: 10em auto;
+}
+
+main .prototyping {
+  margin-top: 13em;
+}
+
+main section {
+  margin-bottom: 6em;
+  padding: 0 5px;
+}
+
+.description {
+  line-height: 1.6em;
+  color: grey;
+}
+
+.open-source img {
+  width: 49%;
+  box-shadow: 0 0 5rem rgba(0,0,0,.2);
+}
+
+.open-source .description {
+  float: left;
+  width: 49%;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.run-locally img.rails{
+  width: 200px;
+}
+
+.run-locally img.mongo {
+  width: 250px;
+  margin-left: 30px;
+}
+
+.run-locally .logos {
+  text-align: center;
 }
