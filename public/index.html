@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="landing-page.css">
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  @import url('https://fonts.googleapis.com/css?family=Montserrat|Reenie+Beanie');
 </style>
 
 </head>
@@ -16,16 +16,18 @@
     <header class="border-header">
       <div class="container">
         <div class="center">
-          <h1 class="title">The Public JSON Storage.</h1>
+          <h1 class="title">The public JSON storage.</h1>
 
           <p class="sub-title">
-            Free, open-source service to store JSON data through a RESTFul API.
+            Free, open-source service to store<br/>
+            JSON data through a RESTFul API.<br/>
             <span>No signup or authentication needed.</span>
           </div>
         </div>
 
         <div class="getting-started">
-          <h3>Getting started in one command</h3>
+          <h3>* It's easy to use!<br/>
+            Get started with one command</h3>
           <div id="terminal">
             <div class="buttons">
               <span class="circle red"></span>
@@ -53,7 +55,7 @@
     speed: 25
   });
   t.run(function (o) {
-    o.output('$> ').wait(100);
+    o.output('$> ').wait(4000);
     o.output('curl -X POST -H ').wait(300);
     o.output('"Content-Type: application/json" -f').wait(200)
     o.del(3).output(' -d \'{"name": "Testing"}\'  ').wait(100);
