@@ -31,6 +31,17 @@ header .sub-title span {
   text-decoration: underline;
 }
 
+.logo {
+  width: 4em;
+  margin: auto;
+}
+
+header .logo img {
+  width: 4em;
+  position: absolute;
+  margin-top: 26px;
+}
+
 #terminal {
   background-color: #404040;
   color: #e8e8e8;
