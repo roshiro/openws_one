@@ -210,3 +210,24 @@ main section {
 .run-locally .logos {
   text-align: center;
 }
+
+footer {
+  background-color: #A7DBD8;
+  padding: 20px 0;
+  text-align: right;
+}
+
+footer ol {
+  margin: auto;
+  list-style: none;
+  max-width: 900px;
+}
+
+footer ol li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+footer a {
+  text-decoration: none;
+}

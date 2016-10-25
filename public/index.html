@@ -97,7 +97,12 @@
       </section>
     </main>
 
-    <footer></footer>
+    <footer>
+      <ol>
+        <li><a href="https://twitter.com/open_ws" target="blank">Twitter</a></li>
+        <li><a href="https://github.com/roshiro/openws_one" target="blank">Github</a></li>
+      </ol>
+    </footer>
   </div>
   <script src="terminal.min.js"></script>
   <script>
@@ -111,7 +116,7 @@
     o.output('"Content-Type: application/json" -f').wait(200)
     o.del(3).output(' -d \'{"name": "Testing"}\'  ').wait(100);
 
-    o.del(1).output('http://openws-roshiro.rhcloud.com').wait(200)
+    o.del(1).output('https://openws.org').wait(200)
     o.output('/api/collections/books').wait(200);
     o.newline();
     o.output('$> ')
