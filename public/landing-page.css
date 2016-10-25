@@ -32,12 +32,12 @@ header .sub-title span {
 }
 
 .logo {
-  width: 3.5em;
+  width: 3em;
   margin: auto;
 }
 
 header .logo img {
-  width: 3.5em;
+  width: 3em;
   position: absolute;
   margin-top: 26px;
 }
