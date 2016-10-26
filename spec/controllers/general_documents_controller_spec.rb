@@ -4,8 +4,8 @@ describe GeneralDocumentsController do
   let(:document) { double("GeneralDocument") }
 
   before :each do
-    allow(Openws::GeneralDocument).to receive(:new).and_return document
-    allow(document).to receive(:save!)
+    allow(Openws::GeneralDocument).to receive(:with).and_return document
+    allow(document).to receive(:create!)
     allow(document).to receive(:with).and_return document
   end
 
@@ -18,7 +18,7 @@ describe GeneralDocumentsController do
     end
 
     it 'sets the collection name' do
-      expect(document).to receive(:with).with(collection: 'my_prods')
+      expect(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods')
       post :create, body, collection_name: 'my_prods'
     end
 
@@ -40,7 +40,7 @@ describe GeneralDocumentsController do
       end
 
       it 'persists the given JSON' do
-        expect(document).to receive(:save!)
+        expect(document).to receive(:create!)
         post :create, body, collection_name: 'my_prods'
       end
     end

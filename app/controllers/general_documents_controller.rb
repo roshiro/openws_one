@@ -68,8 +68,7 @@ class GeneralDocumentsController < ApplicationController
     raise 'Invalid collection name' unless StorageValidations.collection_name_valid?(coll_name)
 
     Openws::GeneralDocument
-      .new(JSON.parse(request.body.read))
       .with(collection: coll_name)
-      .save!
+      .create!(JSON.parse(request.body.read))
   end
 end
