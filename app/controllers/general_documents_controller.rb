@@ -46,6 +46,20 @@ class GeneralDocumentsController < ApplicationController
     end
   end
 
+  # Updates the given document
+  def update
+    begin
+      document = Openws::GeneralDocument.with(collection: params[:collection_name]).find(params[:id])
+      new_values = JSON.parse(request.body.read).except("id").except("_id")
+      # .with is atomic, so it does not remember the collection to use
+      # For that reason we need to remind mongo what collection to use
+      document.with(collection: params[:collection_name]).update_attributes!(new_values)
+      render json: document, status: 200
+    rescue
+      render json: { msg: 'Document not found' }, status: 404
+    end
+  end
+
   private
 
   def persist_in_collection(coll_name)

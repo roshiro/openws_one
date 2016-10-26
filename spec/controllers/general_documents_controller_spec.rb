@@ -179,4 +179,56 @@ describe GeneralDocumentsController do
       end
     end
   end
+
+  describe '#update' do
+    let(:body) do
+      {
+        "id" => 'existing_id',
+        "name" => 'Beef Burger with tomato',
+        "price" => 4.99
+      }
+    end
+
+    before :each do
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods').and_return document
+      allow(document).to receive(:find).with('existing_id').and_return document
+      allow(document).to receive(:find).with('non_existing_id')
+        .and_raise(Mongoid::Errors::DocumentNotFound, "Error")
+    end
+
+    context 'when document is not found' do
+      before :each do
+        put :update, body.to_json, collection_name: 'my_prods', id: 'non_existing_id'
+      end
+
+      it 'returns 404' do
+        expect(response.status).to eq 404
+      end
+
+      it 'returns helpful message' do
+        expect(response.body).to eq({ msg: 'Document not found' }.to_json)
+      end
+    end
+
+    context 'when document is found' do
+      before :each do
+        allow(document).to receive(:update_attributes!).and_return body
+      end
+
+      it 'returns 200' do
+        put :update, body.to_json, collection_name: 'my_prods', id: 'existing_id'
+        expect(response.status).to eq 200
+      end
+
+      it 'returns updated document' do
+        put :update, body.to_json, collection_name: 'my_prods', id: 'existing_id'
+        expect(response.body).to eq(document.to_json)
+      end
+
+      it 'updates the document' do
+        expect(document).to receive(:update_attributes!).with(body.except("id").except("_id"))
+        put :update, body.to_json, collection_name: 'my_prods', id: 'existing_id'
+      end
+    end
+  end
 end
