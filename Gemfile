@@ -60,7 +60,7 @@ gem 'json', '1.8.2'
 
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 gem 'rack-attack'
-
+gem 'rack-cors'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

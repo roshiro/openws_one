@@ -2,6 +2,7 @@
 class GeneralDocumentsController < ApplicationController
   # Receive calls without passing CSRF token
   protect_from_forgery with: :null_session
+  skip_before_filter :verify_authenticity_token
 
   # Creates a document in the given collection.
   def create
@@ -63,12 +64,14 @@ class GeneralDocumentsController < ApplicationController
   private
 
   def persist_in_collection(coll_name)
-    raise 'JSON cannot be empty' if JSON.parse(request.body.read).empty?
+    body_content = JSON.parse(request.body.read)
+
+    raise 'JSON cannot be empty' if body_content.empty?
 
     raise 'Invalid collection name' unless StorageValidations.collection_name_valid?(coll_name)
 
     Openws::GeneralDocument
       .with(collection: coll_name)
-      .create!(JSON.parse(request.body.read))
+      .create!(body_content)
   end
 end
