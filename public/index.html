@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" href="static-images/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="static-images/favicon-16x16.png" sizes="16x16" />
   <link rel='shortcut icon' href='static-images/favicon.ico' type='image/x-icon'/ >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 <style>
   @import url('https://fonts.googleapis.com/css?family=Montserrat|Reenie+Beanie');
 </style>
@@ -17,7 +18,7 @@
 <body class="landing-page">
   <div class="bg-white">
     <header class="border-header">
-      <div class="logo">
+      <div class="logo animated">
         <img src="static-images/logo.svg">
       </div>
       <div class="container">
@@ -105,22 +106,7 @@
     </footer>
   </div>
   <script src="terminal.min.js"></script>
-  <script>
-  var t = new Terminal({
-    dom: document.getElementById('terminal'),
-    speed: 25
-  });
-  t.run(function (o) {
-    o.output('$> ').wait(4000);
-    o.output('curl -X POST -H ').wait(300);
-    o.output('"Content-Type: application/json" -f').wait(200)
-    o.del(3).output(' -d \'{"name": "Testing"}\'  ').wait(100);
-
-    o.del(1).output('https://openws.org').wait(200)
-    o.output('/api/collections/books').wait(200);
-    o.newline();
-    o.output('$> ')
-  });
-  </script>
+  <script src="https://unpkg.com/scrollreveal@3.3.2/dist/scrollreveal.min.js"></script>
+  <script src="landing-page.js"></script>
 </body>
 </html>

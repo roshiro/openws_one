@@ -34,6 +34,8 @@ header .sub-title span {
 .logo {
   width: 3em;
   margin: auto;
+  -vendor-animation-duration: 10s;
+  -vendor-animation-delay: 4s;
 }
 
 header .logo img {
