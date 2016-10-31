@@ -16,12 +16,42 @@ It is built in Ruby on Rails and MongoDB as storage.
 OpenWS is a RESTFul service, so you can issue HTTP requests from browser via plain javascript, jQuery or any other JS framework of your choice.
 
 ```javascript
-// Saving in a collection called "products"
-var my_product = { name: "milk" };
-$.post("https://openws.org/api/collections/products", my_product)
+// Create
+var my_product = { name: "pizza" };
+$.post("https://openws.org/api/collections/products", JSON.stringify(my_product))
   .done(function(data) {
-    console.log("ID: " + data[0].id); // ID: 547ba6d00b07515f0d4b6c62
+    generated_id = data.id;
+    console.log("ID: " + data.id);
+    console.log("Name: " + data.name);
   });
+
+// Get
+// Replace MY_PRODUCT_ID with the ID you want to get
+$.get("http://localhost:3000/api/collections/products/MY_PRODUCT_ID")
+  .done(function(data) {
+    console.log(data.id + " - " + data.name);
+  });
+
+// Update
+var updated_product = { name: "pepperoni pizza" }
+$.ajax({
+  url: "http://localhost:3000/api/collections/products/MY_PRODUCT_ID",
+  data: JSON.stringify(updated_product),
+  method: 'PUT',
+  success: function(data) {
+    console.log("ID: " + data.id);
+    console.log("Name: " + data.name);
+  }
+});
+
+// Delete
+$.ajax({
+  url: "http://localhost:3000/api/collections/products/MY_PRODUCT_ID",
+  method: 'DELETE',
+  success: function(data) {
+    console.log("Product deleted");
+  }
+});
 ```
 
 ### Terminal (Unix-based systems)

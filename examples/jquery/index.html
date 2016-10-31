@@ -1,0 +1,47 @@
+<html>
+  <head>
+  </head>
+
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script>
+    // Create
+    var my_product = { name: "pizza" };
+    $.post("https://openws.org/api/collections/products", JSON.stringify(my_product))
+      .done(function(data) {
+        generated_id = data.id;
+        console.log("ID: " + data.id);
+        console.log("Name: " + data.name);
+      });
+
+    // Get
+    $.get("http://localhost:3000/api/collections/products/5811222ab3a0126bc5000000")
+      .done(function(data) {
+        console.log(data.id + " - " + data.name);
+      });
+
+    // Update
+    var updated_product = { name: "pepperoni pizza" }
+    $.ajax({
+      url: "http://localhost:3000/api/collections/products/58152e40b3a0120832000000",
+      data: JSON.stringify(updated_product),
+      method: 'PUT',
+      success: function(data) {
+        console.log("ID: " + data.id); // ID: 547ba6d00b07515f0d4b6c62
+        console.log("Name: " + data.name); // milk:
+      }
+    });
+
+    // Delete
+    $.ajax({
+      url: "http://localhost:3000/api/collections/products/58152e40b3a0120832000000",
+      method: 'DELETE',
+      success: function(data) {
+        console.log("Product deleted");
+      }
+    });
+
+    </script>
+  </body>
+</html>
