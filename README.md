@@ -32,7 +32,7 @@ $.get("http://localhost:3000/api/collections/products")
   .done(function(data) {
     var items = data["items"];
     for(idx in items) {
-      console.log(items[idx].id + " - " + items[idx].name);  
+      console.log(items[idx].id + " - " + items[idx].name);
     }
   });
 
@@ -108,4 +108,6 @@ $> bundle exec rails s
 Now OpenWS should be running in port 3000.
 
 
-## Contribute
+## Copyright & License
+
+Copyright (c) 2016 Rafael Oshiro - Released under the [MIT license](https://github.com/roshiro/openws_one/blob/master/LICENSE).
