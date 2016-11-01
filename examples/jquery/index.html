@@ -15,6 +15,15 @@
         console.log("Name: " + data.name);
       });
 
+    // Get all items
+    $.get("https://openws.org/api/collections/products")
+      .done(function(data) {
+        var items = data["items"];
+        for(idx in items) {
+          console.log(items[idx].id + " - " + items[idx].name);
+        }
+      });
+
     // Get
     $.get("http://localhost:3000/api/collections/products/5811222ab3a0126bc5000000")
       .done(function(data) {

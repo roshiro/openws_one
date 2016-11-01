@@ -15,6 +15,8 @@ It is built in Ruby on Rails and MongoDB as storage.
 
 OpenWS is a RESTFul service, so you can issue HTTP requests from browser via plain javascript, jQuery or any other JS framework of your choice.
 
+Below is an example using `products` collection.
+
 ```javascript
 // Create
 var my_product = { name: "pizza" };
@@ -25,7 +27,16 @@ $.post("https://openws.org/api/collections/products", JSON.stringify(my_product)
     console.log("Name: " + data.name);
   });
 
-// Get
+// Get all items
+$.get("http://localhost:3000/api/collections/products")
+  .done(function(data) {
+    var items = data["items"];
+    for(idx in items) {
+      console.log(items[idx].id + " - " + items[idx].name);  
+    }
+  });
+
+// Get one item
 // Replace MY_PRODUCT_ID with the ID you want to get
 $.get("http://localhost:3000/api/collections/products/MY_PRODUCT_ID")
   .done(function(data) {
@@ -55,8 +66,20 @@ $.ajax({
 ```
 
 ### Terminal (Unix-based systems)
-You can make HTTP requests from
+Below are some examples on how to make HTTP requests to OpenWS through terminal.
+```
+Creating
+$ curl -X POST -H "Content-Type: application/json" -d '{"name":"coffee"}' https://openws.org/api/collections/products
 
+Retrieving one item
+$ curl -i -H "Accept: application/json" https://openws.org/api/collections/products/MY_PRODUCT_ID
+
+Updating
+$ curl X PUT -i -H "Accept: application/json" -d 'name'='coffee beans' https://openws.org/api/collections/products/MY_PRODUCT_ID
+
+Deleting
+$ curl -X DELETE -i -H "Accept: application/json" https://openws.org/api/collections/products/MY_PRODUCT_ID
+```
 
 ## Running OpenWS locally
 
