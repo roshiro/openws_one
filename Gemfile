@@ -25,6 +25,7 @@ group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'faker'
+  gem 'factory_girl'
 end
 
 # Add support for the MySQL
@@ -72,3 +73,4 @@ gem 'rack-cors'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'devise'
