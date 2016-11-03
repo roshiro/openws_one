@@ -1,28 +1,27 @@
 require 'rails_helper'
 
 describe DashboardController do
-  before :all do
-    @user = FactoryGirl.create(:user)
-  end
-
-  after :all do
-    @user.delete
-  end
+  let(:user) { double('User') }
 
   describe '#index' do
     context 'when user is signed in' do
+      before :each do
+        allow(request.env['warden']).to receive(:authenticate!).and_return(user)
+        allow(controller).to receive(:current_user).and_return(user)
+      end
+
       it 'renders dashboard' do
-        @request.env['devise.mapping'] = Devise.mappings[:user]
-        sign_in @user
         get :index
         expect(response).to render_template("index")
       end
     end
 
     context 'when user is not signed in' do
+      before :each do
+        allow(request.env['warden']).to receive(:authenticate!).and_throw(:warden, {:scope => :user})
+      end
+
       it 'redirects to signin page' do
-        @request.env['devise.mapping'] = Devise.mappings[:user]
-        sign_out @user
         get :index
         expect(response).to redirect_to("http://test.host/users/sign_in")
       end
