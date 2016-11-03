@@ -26,6 +26,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'faker'
   gem 'factory_girl'
+  gem 'mongoid-rspec', '3.0.0'
 end
 
 # Add support for the MySQL
@@ -59,7 +60,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'json', '1.8.2'
 
-gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
+gem 'mongoid'#, git: 'https://github.com/mongoid/mongoid.git'
 gem 'rack-attack'
 gem 'rack-cors'
 # Use ActiveModel has_secure_password
