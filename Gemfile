@@ -61,6 +61,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'json', '1.8.2'
 
 gem 'mongoid'#, git: 'https://github.com/mongoid/mongoid.git'
+gem 'rack', '1.5.2'
 gem 'rack-attack'
 gem 'rack-cors'
 # Use ActiveModel has_secure_password
@@ -74,4 +75,4 @@ gem 'rack-cors'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'devise'
+gem 'devise', '3.5.10'
