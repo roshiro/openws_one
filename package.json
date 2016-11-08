@@ -1,0 +1,13 @@
+{
+  "name": "webpack-rails-example",
+  "version": "0.0.1",
+  "license": "MIT",
+  "dependencies": {
+    "elm": "^0.17.1",
+    "elm-hot-loader": "^0.3.5",
+    "elm-webpack-loader": "^3.0.6",
+    "stats-webpack-plugin": "^0.2.1",
+    "webpack": "^1.9.11",
+    "webpack-dev-server": "^1.9.0"
+  }
+}

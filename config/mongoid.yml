@@ -134,14 +134,14 @@ test:
           mode: primary
         max_pool_size: 1
 
-<% if ENV['OPENSHIFT_APP_NAME'] %>
+<% if ENV['APP_NAME'] %>
 production:
   clients:
     default:
-      database: <%= ENV['OPENSHIFT_MONGODB_DB'] %>
+      database: <%= ENV['MONGODB_DB'] %>
       hosts:
-        - <%="#{ENV['OPENSHIFT_MONGODB_DB_HOST']}:#{ENV['OPENSHIFT_MONGODB_DB_PORT']}" %>
+        - <%="#{ENV['MONGODB_DB_HOST']}:#{ENV['MONGODB_DB_PORT']}" %>
       options:
-        user: <%= ENV['OPENSHIFT_MONGODB_DB_USERNAME'] %>
-        password: <%= ENV['OPENSHIFT_MONGODB_DB_PASSWORD'] %>
+        user: <%= ENV['MONGODB_DB_USERNAME'] %>
+        password: <%= ENV['MONGODB_DB_PASSWORD'] %>
 <% end %>

@@ -10,7 +10,7 @@
 /test/version_tmp/
 /tmp/
 /log
-
+/elm-stuff/
 # Used by dotenv library to load environment variables.
 # .env
 
@@ -53,3 +53,6 @@ build-iPhoneSimulator/
 .byebug_history
 
 /public/assets/
+# Added by webpack-rails
+/node_modules
+/public/webpack

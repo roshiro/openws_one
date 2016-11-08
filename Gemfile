@@ -6,6 +6,7 @@ gem 'rails', '4.1.4'
 
 # Fix the conflict with the system 'rake':
 gem 'rake', '~> 0.9.6'
+gem 'rails_12factor', group: :production
 
 # Support for databases and environment.
 # Use 'sqlite3' for testing and development and mysql and postgresql
@@ -60,7 +61,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'json', '1.8.2'
 
-gem 'mongoid'#, git: 'https://github.com/mongoid/mongoid.git'
+gem 'mongoid'
 gem 'rack', '1.5.2'
 gem 'rack-attack'
 gem 'rack-cors'
@@ -75,4 +76,9 @@ gem 'rack-cors'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'devise', '3.5.10'
+gem 'devise'
+
+gem "webpack-rails"
+
+gem "foreman"
+gem 'puma'
