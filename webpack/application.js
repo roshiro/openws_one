@@ -1,3 +1,5 @@
+require('./es2015/test.js')
+
 console.log("Hello world 2!");
 
 // inject bundled Elm app into div#main

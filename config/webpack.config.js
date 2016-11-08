@@ -33,11 +33,21 @@ var config = {
   },
 
   module: {
-    loaders: [{
-      test: /\.elm$/,
-      exclude: [/elm-stuff/, /node_modules/],
-      loader: 'elm-hot!elm-webpack?verbose=true&warn=true'
-    }]
+    loaders: [
+      {
+        test: /\.elm$/,
+        exclude: [/elm-stuff/, /node_modules/],
+        loader: 'elm-hot!elm-webpack?verbose=true&warn=true'
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel', // 'babel-loader' is also a valid name to reference
+        query: {
+          presets: ['es2015']
+        }
+      }
+    ]
   },
 
   plugins: [
