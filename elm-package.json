@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Public JSON Storage service",
-    "repository": "https://github.com/roshiro/openws_one.git",
+    "repository": "https://github.com/roshiro/openwsone.git",
     "license": "MIT",
     "source-directories": [
         "."
