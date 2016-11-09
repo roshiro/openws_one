@@ -1,10 +1,15 @@
-import Html exposing (..)
+import Html exposing (Html, button, div, text)
+import Html.App as App
+import Html.Events exposing (onClick)
+
+main =
+  App.beginnerProgram { model = model, view = view, update = update }
 
 -- MODEL
 
-type alias LoggedIn = Bool
+type alias Model = Bool
 
-model : LoggedIn
+model : Model
 model =
   True
 
@@ -12,18 +17,18 @@ model =
 
 type Msg = Login | Logout
 
-update : Msg -> LoggedIn -> LoggedIn
+update : Msg -> Model -> Model
 update msg model =
   case msg of
     Login ->
-      model True
+      True
 
     Logout ->
-      model False
+      False
 
 --  VIEW
 
-view : LoggedIn -> Html Msg
-view model = Html Msg
+view : Model -> Html Msg
+view model =
   div []
-    [ a [ onClick Logout ] [ href "#" ] [ text "Logout" ] ]
+    [ button [ onClick Logout ] [ text "Logout" ] ]

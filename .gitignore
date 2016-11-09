@@ -13,6 +13,7 @@
 /elm-stuff/
 # Used by dotenv library to load environment variables.
 # .env
+npm-debug.log
 
 ## Specific to RubyMotion:
 .dat*
