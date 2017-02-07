@@ -63,4 +63,8 @@ Rails.application.routes.draw do
     match 'collections/:collection_name/:id', to: 'general_documents#search_by_id', via: [:get]
     match 'collections/:collection_name/:id', to: 'general_documents#update', via: [:put]
   end
+
+  # devise_for :users, controllers: {
+  #   sessions: 'users/sessions'
+  # }
 end

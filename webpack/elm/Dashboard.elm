@@ -1,34 +1,79 @@
-import Html exposing (Html, button, div, text)
-import Html.App as App
-import Html.Events exposing (onClick)
+import Html exposing (..)
+import Html.Events exposing (..)
+import Html.Attributes exposing (..)
+import Http
+import Json.Decode as Decode
 
+main : Program Never Model Msg
 main =
-  App.beginnerProgram { model = model, view = view, update = update }
+  Html.program
+    { init = init
+    -- , model = model
+    , update = update
+    , view = view
+    , subscriptions = subscriptions
+    }
 
 -- MODEL
 
-type alias Model = Bool
+type alias Model =
+  { email: String
+  , loggedIn: Bool
+  }
 
-model : Model
-model =
-  True
+
+-- INIT
+
+init : (Model, Cmd Msg)
+init =
+  ( Model "" True
+  , Cmd.none
+  )
+
 
 -- UPDATE
 
-type Msg = Login | Logout
+type Msg = Logout | LogoutUser (Result Http.Error String)
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    Login ->
-      True
-
     Logout ->
-      False
+      (Model "" False, logout)
+
+    LogoutUser (Ok str) ->
+      (Model "" False, Cmd.none)
+
+    LogoutUser (Err e) ->
+      (model, Cmd.none)
 
 --  VIEW
 
 view : Model -> Html Msg
 view model =
   div []
-    [ button [ onClick Logout ] [ text "Logout" ] ]
+    [ a
+      [ onClick(Logout)
+      , href "#"
+      ]
+      [ text "Logout"
+      ]
+    ]
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
+
+-- HTTP
+logout : Cmd Msg
+logout =
+  let
+    url =
+      "/users/sign_out"
+  in
+    Http.send LogoutUser (Http.get url decodeJsonResponse)
+
+decodeJsonResponse : Decode.Decoder String
+decodeJsonResponse =
+  Decode.at ["name"] Decode.string
