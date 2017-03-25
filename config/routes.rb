@@ -8,6 +8,12 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'dashboard#index'
 
+  resources :users do
+    get 'profile'
+  end
+
+  resources :apps
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
