@@ -1,4 +1,5 @@
-const user = (state = {}, action) => {
+const user = (state, action) => {
+  console.log(state)
   switch (action.type) {
     case 'LOGOUT':
       return {
@@ -6,7 +7,10 @@ const user = (state = {}, action) => {
         logged_in: false
       }
     default:
-      return state
+      return {
+        ...state,
+        logged_in: true
+      }
   }
 }
 

@@ -7,5 +7,7 @@ const App = ({ children, routes }) => (
     {children}
   </div>
 )
-
+App.contextTypes = {
+  store: React.PropTypes.object
+}
 export default App
