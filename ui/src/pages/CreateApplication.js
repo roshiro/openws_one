@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import jQuery from 'jquery';
 
 class CreateApplication extends Component {
   constructor(props) {
@@ -10,8 +11,21 @@ class CreateApplication extends Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+
+    jQuery.ajax({
+      method: 'POST',
+      url: '/apps',
+      data: {
+        app: {
+          name: this.state.value
+        },
+        authenticity_token: jQuery('meta[name=csrf-token]').attr('content')
+      },
+      success: (data) => {
+        console.log(data)
+      }
+    });
   }
 
   handleChange(event) {

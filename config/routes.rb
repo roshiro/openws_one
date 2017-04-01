@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   get 'dashboard' => 'dashboard#index'
+  get 'new_application' => 'dashboard#index'
 
   resources :users do
     get 'profile'

@@ -4,7 +4,7 @@ import { IndexRoute, browserHistory, Router, Route } from 'react-router';
 import App from './App';
 import Dashboard from './pages/Dashboard';
 import CreateApplication from './pages/CreateApplication'
-import './index.css';
+// import './index.css';
 
 const app = (
   <Router history={browserHistory}>

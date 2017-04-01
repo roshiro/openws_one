@@ -12,6 +12,10 @@ class AppsController < ApplicationController
 
   private
 
+  def app_params
+    params.require(:app).permit(:name)
+  end
+
   def load_app
     @app ||= App.where(user_id: current_user.id, api_key: params[:id]).first
   end
@@ -19,8 +23,9 @@ class AppsController < ApplicationController
   def create_app
     app = App.create(name: params[:app][:name])
     app.api_key = SecureRandom.uuid
-    app.user_id = current_user.id
+    app.user_id = current_user._id
     app.save!
+    app
   end
 
 end
