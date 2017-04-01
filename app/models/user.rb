@@ -1,6 +1,9 @@
 # Class that represents the users of OpenWS
 class User
   include Mongoid::Document
+
+  has_many :apps
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

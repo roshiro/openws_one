@@ -2,12 +2,19 @@ class AppsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_app, only: :show
 
+  def index
+    render json: { applications: current_user.apps }
+  end
+
   def create
     render json: create_app
   end
 
   def show
-    render json: @app
+    respond_to do |format|
+      format.json { render json: { application: @app } }
+      format.html { render 'dashboard/index' }
+    end
   end
 
   private
@@ -17,7 +24,7 @@ class AppsController < ApplicationController
   end
 
   def load_app
-    @app ||= App.where(user_id: current_user.id, api_key: params[:id]).first
+    @app ||= current_user.apps.where(id: params[:id]).first
   end
 
   def create_app

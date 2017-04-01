@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router'
 import jQuery from 'jquery';
 
 class CreateApplication extends Component {
@@ -15,7 +16,7 @@ class CreateApplication extends Component {
 
     jQuery.ajax({
       method: 'POST',
-      url: '/apps',
+      url: this.props.url,
       data: {
         app: {
           name: this.state.value
@@ -23,14 +24,13 @@ class CreateApplication extends Component {
         authenticity_token: jQuery('meta[name=csrf-token]').attr('content')
       },
       success: (data) => {
-        console.log(data)
+        browserHistory.push(`/apps/${data.id}`);
       }
     });
   }
 
   handleChange(event) {
-    console.log(event.target.value)
-    this.setState({value: event.target.value});
+    this.setState({value: event.target.value})
   }
 
   render() {

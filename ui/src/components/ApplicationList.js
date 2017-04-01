@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import jQuery from 'jquery';
 
 class ApplicationList extends Component {
   constructor() {
     super()
 
     this.state = {
-      applications: [
-        { id: 1, name: 'CakeApp', apiKey: 'dasdsd-bgfhfd45-345fvvf' },
-        { id: 2, name: 'MobileApp', apiKey: '22dgth-bgfhfd45-345fvvf' },
-      ]
+      applications: []
     }
+  }
+
+  componentDidMount() {
+    jQuery.ajax({
+      method: 'GET',
+      url: '/apps',
+      success: (data) => {
+        this.setState({ applications: data.applications })
+      }
+    });
   }
 
   render() {
@@ -27,8 +35,8 @@ class ApplicationList extends Component {
           <tbody>
             { this.state.applications.map(app =>
               <tr key={ app.id }>
-                <td>{ app.apiKey }</td>
                 <td>{ app.name }</td>
+                <td><Link to={`/apps/${app.id}`}>{ app.api_key }</Link></td>
               </tr>
             )}
           </tbody>
