@@ -1,6 +1,6 @@
 class AppsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_app, only: :show
+  before_filter :load_app, only: [:show, :destroy]
 
   def index
     render json: { applications: current_user.apps }
@@ -15,6 +15,10 @@ class AppsController < ApplicationController
       format.json { render json: { application: @app } }
       format.html { render 'dashboard/index' }
     end
+  end
+
+  def destroy
+    render json: @app.destroy
   end
 
   private

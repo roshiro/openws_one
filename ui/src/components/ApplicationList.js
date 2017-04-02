@@ -21,6 +21,25 @@ class ApplicationList extends Component {
     });
   }
 
+  deleteHandler(app, e) {
+    e.preventDefault();
+    jQuery.ajax({
+      method: 'DELETE',
+      url: `/apps/${app.id}`,
+      data: {
+        authenticity_token: jQuery('meta[name=csrf-token]').attr('content')
+      },
+      success: (data) => {
+        debugger
+        this.setState(
+          {
+            applications: this.state.applications.splice(this.state.applications.indexOf(app))
+          }
+        )
+      }
+    });
+  }
+
   render() {
     return (
       <div className="ApplicationList">
@@ -30,6 +49,7 @@ class ApplicationList extends Component {
             <tr>
               <td>Name</td>
               <td>API Key</td>
+              <td></td>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +57,7 @@ class ApplicationList extends Component {
               <tr key={ app.id }>
                 <td>{ app.name }</td>
                 <td><Link to={`/apps/${app.id}`}>{ app.api_key }</Link></td>
+                <td><a href="#" onClick={ this.deleteHandler.bind(this, app) }>delete</a></td>
               </tr>
             )}
           </tbody>
