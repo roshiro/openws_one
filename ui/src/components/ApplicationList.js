@@ -30,12 +30,8 @@ class ApplicationList extends Component {
         authenticity_token: jQuery('meta[name=csrf-token]').attr('content')
       },
       success: (data) => {
-        debugger
-        this.setState(
-          {
-            applications: this.state.applications.splice(this.state.applications.indexOf(app))
-          }
-        )
+        this.state.applications.splice(this.state.applications.indexOf(app), 1)
+        this.setState({ applications: this.state.applications })
       }
     });
   }

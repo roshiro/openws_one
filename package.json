@@ -29,6 +29,6 @@
     "react-router-dom": "^4.0.0"
   },
   "scripts": {
-    "webpack": "./node_modules/.bin/webpack-dev-server --config config/webpack.config.js"
+    "webpack": "./node_modules/.bin/webpack-dev-server -d --config config/webpack.config.js"
   }
 }
