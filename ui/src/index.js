@@ -5,6 +5,7 @@ import App from './App';
 import Dashboard from './pages/Dashboard';
 import CreateApplication from './pages/CreateApplication'
 import Application from './pages/Application'
+import Documentation from './pages/Documentation'
 
 const app = (
   <Router history={browserHistory}>
@@ -12,6 +13,7 @@ const app = (
       <IndexRoute component={Dashboard} />
       <Route path="/new_application" component={() => <CreateApplication url={"/apps"}/>} />
       <Route path="/apps/:app_id" component={Application} />
+      <Route path="/documentation" component={ Documentation } />
     </Route>
   </Router>
 )

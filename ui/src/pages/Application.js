@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import jQuery from 'jquery';
+import CollectionList from './../components/CollectionList'
+import './Application.scss';
 
 class Application extends Component {
   constructor() {
     super()
     this.state = {
-      application: {}
+      application: {},
+      collections: []
     }
   }
 
@@ -23,10 +26,12 @@ class Application extends Component {
     return (
       <div id='application-page'>
         <h2>
-          Application
+          Application: { this.state.application.name }
         </h2>
-        Name: { this.state.application.name }
-        API Key: { this.state.application.api_key }
+
+        API Key: <code>{ this.state.application.api_key }</code>
+
+        <CollectionList collections={ this.state.collections } />
       </div>
     );
   }

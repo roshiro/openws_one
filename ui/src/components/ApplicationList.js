@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import jQuery from 'jquery';
+import { Button, Table, Icon } from 'semantic-ui-react';
+import './ApplicationList.scss';
 
 class ApplicationList extends Component {
   constructor() {
@@ -38,26 +40,36 @@ class ApplicationList extends Component {
 
   render() {
     return (
-      <div className="ApplicationList">
-        <Link to='/new_application'>Create new application</Link>
-        <table>
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>API Key</td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody>
+      <div className="application-list">
+        <div className='page-actions'>
+          <Button as={Link} primary to='/new_application'>
+            <Icon name='add' />
+            New Application
+          </Button>
+        </div>
+        <Table celled striped>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>API Key</Table.HeaderCell>
+              <Table.HeaderCell></Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             { this.state.applications.map(app =>
-              <tr key={ app.id }>
-                <td>{ app.name }</td>
-                <td><Link to={`/apps/${app.id}`}>{ app.api_key }</Link></td>
-                <td><a href="#" onClick={ this.deleteHandler.bind(this, app) }>delete</a></td>
-              </tr>
+              <Table.Row key={ app.id }>
+                <Table.Cell>{ app.name }</Table.Cell>
+                <Table.Cell><Link to={`/apps/${app.id}`}>{ app.api_key }</Link></Table.Cell>
+                <Table.Cell>
+                  <a href="#" onClick={ this.deleteHandler.bind(this, app) }>
+                    <Icon name='delete' />
+                    delete
+                  </a>
+                </Table.Cell>
+              </Table.Row>
             )}
-          </tbody>
-        </table>
+          </Table.Body>
+        </Table>
       </div>
     );
   }
