@@ -8,7 +8,29 @@ class App extends Component {
   constructor() {
     super()
 
-    this.state = {}
+    this.state = {
+      active_route: 'dashboard'
+    }
+  }
+
+  componentWillMount() {
+    this.handleActiveMenuItems()
+  }
+
+  clickHandler(active_route, e) {
+    this.setState({active_route: active_route})
+  }
+
+  handleActiveMenuItems() {
+    let currentRoute = this.props.location.pathname
+
+    if(currentRoute.indexOf('/account') >= 0) {
+      this.setState({active_route: 'account'})
+    } else if(currentRoute.indexOf('/dashboard') >= 0) {
+      this.setState({active_route: 'dashboard'})
+    } else if(currentRoute.indexOf('/documentation') >= 0) {
+      this.setState({active_route: 'documentation'})
+    }
   }
 
   signOutHandler(e) {
@@ -25,19 +47,31 @@ class App extends Component {
     })
   }
 
+  dashboardState() {
+    return this.state.active_route == 'dashboard' ? 'active' : ''
+  }
+
+  documentationState() {
+    return this.state.active_route == 'documentation' ? 'active' : ''
+  }
+
+  accountState() {
+    return this.state.active_route == 'account' ? 'active' : ''
+  }
+
   render() {
     return (
       <div className="App ui container">
         <div className="App-header">
           <div className="ui secondary  menu">
             <Image src='/static-images/logo.png' className='logo' size='mini' />
-            <Link to='/dashboard' className="active item">
+            <Link to='/dashboard' onClick={ this.clickHandler.bind(this, 'dashboard') } className={`item ${this.dashboardState()}`}>
               Dashboard
             </Link>
-            <Link to='/documentation' className="item">
+            <Link to='/documentation' onClick={ this.clickHandler.bind(this, 'documentation') } className={`item ${this.documentationState()}`}>
               Documentation
             </Link>
-            <Link to='/documentation' className="item">
+            <Link to='/account' onClick={ this.clickHandler.bind(this, 'account') } className={`item ${this.accountState()}`}>
               Account
             </Link>
             <div className="right menu">

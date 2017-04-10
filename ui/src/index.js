@@ -12,6 +12,7 @@ const app = (
     <Route path="/dashboard" component={App}>
       <IndexRoute component={Dashboard} />
       <Route path="/new_application" component={() => <CreateApplication url={"/apps"}/>} />
+      <Route path="/account" component={ Documentation } />
       <Route path="/apps/:app_id" component={Application} />
       <Route path="/documentation" component={ Documentation } />
     </Route>
