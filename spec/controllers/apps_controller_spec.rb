@@ -35,13 +35,15 @@ RSpec.describe AppsController, type: :controller do
   end
 
   describe '#show' do
+    let(:apps) { double('Apps') }
     before :each do
-      allow(App).to receive(:where).with(user_id: user.id, api_key: 'some_key').and_return([instance])
+      allow(user).to receive(:apps).and_return(apps)
+      allow(apps).to receive(:where).with(id: 'some_key').and_return([instance])
     end
 
     it 'returns the App' do
-      xhr :get, :show, { id: 'some_key' }
-      expect(response.body).to eq(instance.to_json)
+      get :show, id: 'some_key', format: :json
+      expect(response.body).to eq({application: instance}.to_json)
     end
   end
 
