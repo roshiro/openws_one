@@ -44,8 +44,12 @@ var config = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel', // 'babel-loader' is also a valid name to reference
         query: {
-          presets: ['es2015']
+          presets: ['es2015', 'react', 'stage-2']
         }
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
   },

@@ -7,6 +7,15 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   get 'dashboard' => 'dashboard#index'
+  get 'documentation' => 'dashboard#index'
+  get 'account' => 'dashboard#index'
+  get 'new_application' => 'dashboard#index'
+
+  resources :users do
+    get 'profile'
+  end
+
+  resources :apps
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
