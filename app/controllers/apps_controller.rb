@@ -12,7 +12,7 @@ class AppsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json { render json: { application: @app } }
+      format.json { render json: { application: @app, collections: @collections } }
       format.html { render 'dashboard/index' }
     end
   end
@@ -29,6 +29,7 @@ class AppsController < ApplicationController
 
   def load_app
     @app ||= current_user.apps.where(id: params[:id]).first
+    @collections ||= @app.collections
   end
 
   def create_app

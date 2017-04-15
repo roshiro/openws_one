@@ -29,27 +29,34 @@ var config = {
   },
 
   resolve: {
-    root: path.join(__dirname, '..', 'webpack')
+    // root: path.join(__dirname, '..', 'webpack')
+    modules: [
+      path.join(__dirname, '..', 'src'),
+      'node_modules'
+    ]
   },
 
   module: {
-    loaders: [
-      {
-        test: /\.elm$/,
-        exclude: [/elm-stuff/, /node_modules/],
-        loader: 'elm-hot!elm-webpack?verbose=true&warn=true'
-      },
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel', // 'babel-loader' is also a valid name to reference
-        query: {
-          presets: ['es2015', 'react', 'stage-2']
-        }
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015', 'react', 'stage-2']
+            }
+          }
+        ]
       },
       {
         test: /\.scss$/,
-        loaders: ["style-loader", "css-loader", "sass-loader"]
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "sass-loader" },
+        ]
       }
     ]
   },
@@ -75,9 +82,7 @@ if (production) {
     }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('production') }
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
+    })
   );
 } else {
   config.devServer = {

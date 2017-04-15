@@ -17,7 +17,10 @@ class Application extends Component {
       method: 'GET',
       url: `/apps/${this.props.params.app_id}`,
       success: (data) => {
-        this.setState({application: data.application})
+        this.setState({
+          application: data.application,
+          collections: data.collections
+        })
       }
     })
   }

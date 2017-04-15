@@ -75,12 +75,6 @@ class App extends Component {
               Account
             </Link>
             <div className="right menu">
-              <div className="item">
-                <div className="ui icon input">
-                  <input type="text" placeholder="Search..." />
-                  <i className="search link icon"></i>
-                </div>
-              </div>
               <a className="ui item" id='signout-link' onClick={ this.signOutHandler.bind(this) }>
                 Logout
               </a>
