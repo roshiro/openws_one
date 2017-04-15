@@ -29,7 +29,6 @@ var config = {
   },
 
   resolve: {
-    // root: path.join(__dirname, '..', 'webpack')
     modules: [
       path.join(__dirname, '..', 'src'),
       'node_modules'

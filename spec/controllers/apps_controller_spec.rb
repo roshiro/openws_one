@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe AppsController, type: :controller do
-  let(:user) { User.new }
+  let(:user) { double('User') }
+  let(:user_id) { '98921380123' }
   let(:app_json) { { name: 'My Test Application' } }
   let(:instance) { App.new }
   let(:api_key) { '12b2883e-bd2f-48bb-8320-60e6096862d1' }
@@ -10,6 +11,7 @@ RSpec.describe AppsController, type: :controller do
     allow(request.env['warden']).to receive(:authenticate!).and_return(user)
     allow(controller).to receive(:current_user).and_return(user)
     allow(SecureRandom).to receive(:uuid).and_return api_key
+    allow(user).to receive(:_id).and_return user_id
   end
 
   describe '#create' do
@@ -36,14 +38,16 @@ RSpec.describe AppsController, type: :controller do
 
   describe '#show' do
     let(:apps) { double('Apps') }
+    let(:collections) { double('Collections') }
     before :each do
       allow(user).to receive(:apps).and_return(apps)
       allow(apps).to receive(:where).with(id: 'some_key').and_return([instance])
+      allow(instance).to receive(:collections).and_return collections
     end
 
     it 'returns the App' do
       get :show, id: 'some_key', format: :json
-      expect(response.body).to eq({application: instance}.to_json)
+      expect(response.body).to eq({application: instance, collections: collections}.to_json)
     end
   end
 
