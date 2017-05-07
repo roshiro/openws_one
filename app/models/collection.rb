@@ -19,4 +19,12 @@ class Collection
   def full_collection_name
     "#{app_id}.#{name}"
   end
+
+  # Override BSON
+  def as_json(*args)
+   res = super
+   res["app_id"] = res.delete("app_id").to_s
+   res["user_id"] = res.delete("user_id").to_s
+   res
+  end
 end

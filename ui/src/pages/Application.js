@@ -10,6 +10,7 @@ class Application extends Component {
       application: {},
       collections: []
     }
+    this.deleteCollectionHandler = this.deleteCollectionHandler.bind(this)
   }
 
   componentWillMount() {
@@ -25,6 +26,28 @@ class Application extends Component {
     })
   }
 
+  deleteCollectionHandler(coll, e) {
+    let self = this
+    e.preventDefault()
+    jQuery.ajax({
+      method: 'DELETE',
+      url: `/apps/${coll.app_id}/collections/${coll.id}`,
+      data: {
+        authenticity_token: jQuery('meta[name=csrf-token]').attr('content')
+      },
+      success: (data, textStatus, xhr) => {
+        self.state.collections.splice(self.state.collections.indexOf(coll), 1)
+        self.setState({ collections: self.state.collections })
+        debugger
+        if(data.status >= 400) {
+          Notifier.error(data.msg, 'Error');
+        } else {
+          Notifier.success(data.msg, 'Success');
+        }
+      }
+    });
+  }
+
   render() {
     return (
       <div id='application-page'>
@@ -34,7 +57,7 @@ class Application extends Component {
 
         API Key: <code>{ this.state.application.api_key }</code>
 
-        <CollectionList collections={ this.state.collections } />
+        <CollectionList collections={ this.state.collections } deleteHandler={ this.deleteCollectionHandler } />
       </div>
     );
   }

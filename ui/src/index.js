@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import CreateApplication from './pages/CreateApplication'
 import Application from './pages/Application'
 import Documentation from './pages/Documentation'
+import jQuery from 'jquery';
 
 const app = (
   <Router history={browserHistory}>

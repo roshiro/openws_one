@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { List, Button, Table, Icon } from 'semantic-ui-react';
+import { List, Button, Table, Icon, Header } from 'semantic-ui-react';
 import jQuery from 'jquery';
 import './CollectionList.scss';
 
 class CollectionList extends Component {
-  viewCollectionHandler(e, coll) {
+  viewCollectionHandler(coll, e) {
     e.preventDefault()
-
+    window.open('', '_blank')
   }
 
   render() {
@@ -20,26 +20,40 @@ class CollectionList extends Component {
       <div className="collection-list">
         <h3>Collections</h3>
         { msg }
-        <List>
-          { this.props.collections.map(coll =>
-            <List.Item key={ coll.id }>
-              <List.Icon name='sticky note outline' />
-              <List.Content>
-                <List.Header>
-                  <a href="#" onClick={ this.viewCollectionHandler.bind(this, coll) } name='View'>
-                    { coll.name }
+        <Table basic='very' celled collapsing>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>Actions</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
+            { this.props.collections.map(coll =>
+              <Table.Row key={ coll.id }>
+                <Table.Cell>
+                  <Header as='h4' image>
+                    <Icon name='sticky note outline' />
+                    <Header.Content>
+                      { coll.name }
+                      <Header.Subheader>{ coll.created_at }</Header.Subheader>
+                    </Header.Content>
+                  </Header>
+                </Table.Cell>
+                <Table.Cell>
+                  <a href="#" onClick={ (e) => this.viewCollectionHandler(coll, e) }>
+                    <Icon name='external square' />
+                    view
                   </a>
-                  <a href="#" onClick={ this.viewCollectionHandler.bind(this, coll) } name='Delete'>
-                    Delete
+                  <a href="#" onClick={ (e) => this.props.deleteHandler(coll, e) }>
+                    <Icon name='delete' />
+                    delete
                   </a>
-                </List.Header>
-                <List.Description>
-                  Created At: { coll.created_at }
-                </List.Description>
-              </List.Content>
-            </List.Item>
-          ) }
-        </List>
+                </Table.Cell>
+              </Table.Row>
+            ) }
+          </Table.Body>
+        </Table>
       </div>
     );
   }
