@@ -28,7 +28,7 @@ $.post("https://openws.org/api/collections/products", JSON.stringify(my_product)
   });
 
 // Get all items
-$.get("http://localhost:3000/api/collections/products")
+$.get("https://openws.org/api/collections/products")
   .done(function(data) {
     var items = data["items"];
     for(idx in items) {
@@ -38,7 +38,7 @@ $.get("http://localhost:3000/api/collections/products")
 
 // Get one item
 // Replace MY_PRODUCT_ID with the ID you want to get
-$.get("http://localhost:3000/api/collections/products/MY_PRODUCT_ID")
+$.get("https://openws.org/api/collections/products/MY_PRODUCT_ID")
   .done(function(data) {
     console.log(data.id + " - " + data.name);
   });
@@ -46,7 +46,7 @@ $.get("http://localhost:3000/api/collections/products/MY_PRODUCT_ID")
 // Update
 var updated_product = { name: "pepperoni pizza" }
 $.ajax({
-  url: "http://localhost:3000/api/collections/products/MY_PRODUCT_ID",
+  url: "https://openws.org/api/collections/products/MY_PRODUCT_ID",
   data: JSON.stringify(updated_product),
   method: 'PUT',
   success: function(data) {
@@ -57,7 +57,7 @@ $.ajax({
 
 // Delete
 $.ajax({
-  url: "http://localhost:3000/api/collections/products/MY_PRODUCT_ID",
+  url: https://openws.org/api/collections/products/MY_PRODUCT_ID",
   method: 'DELETE',
   success: function(data) {
     console.log("Product deleted");
