@@ -1,6 +1,6 @@
-sqlite: &sqlite
-  adapter: sqlite3
-  database: db/<%= Rails.env %>.sqlite3
+# sqlite: &sqlite
+#   adapter: sqlite3
+#   database: db/<%= Rails.env %>.sqlite3
 
 # mysql: &mysql
 #   adapter: mysql2
@@ -20,17 +20,17 @@ sqlite: &sqlite
 #   min_messages: ERROR
 #   reconnect: false
 
-defaults: &defaults
-  pool: 5
-  timeout: 5000
-  encoding: utf8
-  <<: *<%= ENV['RAILS_DB'] || "sqlite" %>
-
-development:
-  <<: *defaults
-
-test: &test
-  <<: *defaults
-
-production:
-  <<: *defaults
+# defaults: &defaults
+#   pool: 5
+#   timeout: 5000
+#   encoding: utf8
+#   <<: *<%= ENV['RAILS_DB'] || "sqlite" %>
+#
+# development:
+#   <<: *defaults
+#
+# test: &test
+#   <<: *defaults
+#
+# production:
+#   <<: *defaults
