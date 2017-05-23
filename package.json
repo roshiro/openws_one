@@ -1,6 +1,9 @@
 {
   "name": "openws_one",
   "version": "0.2.0",
+  "engines": {
+    "node": "7.7.1"
+  },
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
