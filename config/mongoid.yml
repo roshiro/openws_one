@@ -22,6 +22,7 @@ test:
           mode: primary
         max_pool_size: 1
 
+<% if ENV['RAILS_ENV'] == 'production' %>
 production:
   clients:
     default:
@@ -31,3 +32,4 @@ production:
       options:
         user: <%= ENV['MONGODB_DB_USERNAME'] %>
         password: <%= ENV['MONGODB_DB_PASSWORD'] %>
+<% end %>
