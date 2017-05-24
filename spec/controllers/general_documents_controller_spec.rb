@@ -86,7 +86,7 @@ describe GeneralDocumentsController do
     describe 'when collection name exists' do
       it 'returns the list of JSON objects' do
         get :show, collection_name: 'todo_list'
-        expect(response.body).to eq({ items: items }.to_json)
+        expect(response.body).to eq(items.to_json)
       end
 
       it 'returns status code 200' do

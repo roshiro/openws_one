@@ -19,9 +19,7 @@ class GeneralDocumentsController < ApplicationController
   # Returns all the documents from the given collection
   def show
     if Openws::GeneralDocument.with(collection: params[:collection_name]).exists?
-      render json: {
-        items: Openws::GeneralDocument.with(collection: params[:collection_name]).all
-      }
+      render json: Openws::GeneralDocument.with(collection: params[:collection_name]).all
     else
       render json: { msg: 'Invalid collection' }, status: 400
     end
