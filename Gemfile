@@ -83,3 +83,5 @@ gem "webpack-rails"
 
 gem "foreman"
 gem 'puma'
+
+gem 'newrelic_rpm'
