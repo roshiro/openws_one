@@ -37,5 +37,11 @@ module Rails4Example
         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
     end
+
+    Dynopoker.configure do |config|
+    	config.address = 'https://openws.org/api/collections/dynopoker'
+    #  config.enable = false # default is true
+    #  config.poke_frequency = 123 # default is 1800s (30min)
+    end
   end
 end

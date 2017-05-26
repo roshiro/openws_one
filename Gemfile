@@ -85,3 +85,5 @@ gem "foreman"
 gem 'puma'
 
 gem 'newrelic_rpm'
+
+gem 'dynopoker'
