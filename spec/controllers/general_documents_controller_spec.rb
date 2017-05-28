@@ -4,7 +4,6 @@ describe GeneralDocumentsController do
   let(:document) { double("GeneralDocument") }
 
   before :each do
-    allow(Openws::GeneralDocument).to receive(:with).and_return document
     allow(document).to receive(:create!)
     allow(document).to receive(:with).and_return document
   end
@@ -18,7 +17,7 @@ describe GeneralDocumentsController do
     end
 
     it 'sets the collection name' do
-      expect(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods')
+      expect(Openws::GeneralDocument).to receive(:with).with(collection: 'public.my_prods')
       post :create, body, collection_name: 'my_prods'
     end
 
@@ -34,6 +33,10 @@ describe GeneralDocumentsController do
     end
 
     describe 'for a valid JSON body' do
+      before :each do
+        allow(Openws::GeneralDocument).to receive(:with).with(collection: 'public.my_prods').and_return document
+      end
+
       it 'returns code 201' do
         post :create, body, collection_name: 'my_prods'
         expect(response.status).to eq 201
@@ -76,9 +79,9 @@ describe GeneralDocumentsController do
     let(:doc_not_exist) { double("DocNotExist") }
 
     before :each do
-      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'non_existing_collection').and_return doc_not_exist
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'public.non_existing_collection').and_return doc_not_exist
       allow(doc_not_exist).to receive(:exists?).and_return false
-      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'todo_list').and_return document
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'public.todo_list').and_return document
       allow(document).to receive(:exists?).and_return true
       allow(document).to receive(:all).and_return items
     end
@@ -107,7 +110,7 @@ describe GeneralDocumentsController do
     let(:expected_obj) { { name: 'Random Product' } }
 
     before :each do
-      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods').and_return document
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'public.my_prods').and_return document
       allow(document).to receive(:find).with("109").and_return expected_obj
       allow(document).to receive(:find).with("9898").and_raise(Mongoid::Errors::DocumentNotFound)
     end
@@ -134,8 +137,8 @@ describe GeneralDocumentsController do
 
   describe '#destroy' do
     before :each do
-      allow(Openws::GeneralDocument).to receive(:with).with({collection: 'non_existing_collection'}).and_raise(Mongoid::Errors::DocumentNotFound, "Error")
-      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods').and_return document
+      allow(Openws::GeneralDocument).to receive(:with).with({collection: 'public.non_existing_collection'}).and_raise(Mongoid::Errors::DocumentNotFound, "Error")
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'public.my_prods').and_return document
       allow(document).to receive(:where).with(id: 'existing_id').and_return document
       allow(document).to receive(:where).with(id: 'non_existing_id').and_raise "error"
       allow(document).to receive(:delete)
@@ -167,7 +170,7 @@ describe GeneralDocumentsController do
 
     describe 'when params are correct' do
       it 'deletes the document' do
-        expect(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods')
+        expect(Openws::GeneralDocument).to receive(:with).with(collection: 'public.my_prods')
         expect(document).to receive(:where).with(id: 'existing_id')
         expect(document).to receive(:delete)
         delete :destroy_by_id, collection_name: 'my_prods', id: 'existing_id'
@@ -190,7 +193,7 @@ describe GeneralDocumentsController do
     end
 
     before :each do
-      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'my_prods').and_return document
+      allow(Openws::GeneralDocument).to receive(:with).with(collection: 'public.my_prods').and_return document
       allow(document).to receive(:find).with('existing_id').and_return document
       allow(document).to receive(:find).with('non_existing_id')
         .and_raise(Mongoid::Errors::DocumentNotFound, "Error")

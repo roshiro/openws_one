@@ -7,7 +7,7 @@ class GeneralDocumentsController < ApplicationController
   # Creates a document in the given collection.
   def create
     begin
-      created_object = persist_in_collection(params[:collection_name])
+      created_object = persist_in_collection
       render json: created_object, status: 201
     rescue JSON::ParserError
       render json: { msg: 'Invalid JSON' }, status: 400
@@ -18,8 +18,8 @@ class GeneralDocumentsController < ApplicationController
 
   # Returns all the documents from the given collection
   def show
-    if Openws::GeneralDocument.with(collection: params[:collection_name]).exists?
-      render json: Openws::GeneralDocument.with(collection: params[:collection_name]).all
+    if Openws::GeneralDocument.with(collection: namespaced_collection).exists?
+      render json: Openws::GeneralDocument.with(collection: namespaced_collection).all
     else
       render json: { msg: 'Invalid collection' }, status: 400
     end
@@ -28,7 +28,7 @@ class GeneralDocumentsController < ApplicationController
   # Returns the document from the given collection
   def search_by_id
     begin
-      result = Openws::GeneralDocument.with(collection: params[:collection_name]).find(params[:id])
+      result = Openws::GeneralDocument.with(collection: namespaced_collection).find(params[:id])
       render json: result, status: 200
     rescue
       render json: { msg: 'Document not found' }, status: 404
@@ -38,7 +38,7 @@ class GeneralDocumentsController < ApplicationController
   # Destroys the document by ID.
   def destroy_by_id
     begin
-      Openws::GeneralDocument.with({collection: params[:collection_name]}).where(id: params[:id]).delete
+      Openws::GeneralDocument.with({collection: namespaced_collection}).where(id: params[:id]).delete
       render json: nil, status: 201
     rescue
       render json: { msg: 'Document not found' }, status: 404
@@ -48,11 +48,11 @@ class GeneralDocumentsController < ApplicationController
   # Updates the given document
   def update
     begin
-      document = Openws::GeneralDocument.with(collection: params[:collection_name]).find(params[:id])
+      document = Openws::GeneralDocument.with(collection: namespaced_collection).find(params[:id])
       new_values = JSON.parse(request.body.read).except("id").except("_id")
       # .with is atomic, so it does not remember the collection to use
       # For that reason we need to remind mongo what collection to use
-      document.with(collection: params[:collection_name]).update_attributes!(new_values)
+      document.with(collection: namespaced_collection).update_attributes!(new_values)
       render json: document, status: 200
     rescue
       render json: { msg: 'Document not found' }, status: 404
@@ -61,15 +61,19 @@ class GeneralDocumentsController < ApplicationController
 
   private
 
-  def persist_in_collection(coll_name)
+  def persist_in_collection
     body_content = JSON.parse(request.body.read)
 
     raise 'JSON cannot be empty' if body_content.empty?
 
-    raise 'Invalid collection name' unless StorageValidations.collection_name_valid?(coll_name)
+    raise 'Invalid collection name' unless StorageValidations.collection_name_valid?(params[:collection_name])
 
     Openws::GeneralDocument
-      .with(collection: coll_name)
+      .with(collection: namespaced_collection)
       .create!(body_content)
+  end
+
+  def namespaced_collection
+    Openws::GeneralDocument.namespaced_collection(params[:collection_name])
   end
 end
