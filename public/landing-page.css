@@ -69,6 +69,7 @@ header .logo img {
   display: table;
   border-collapse: separate;
   margin: auto;
+  margin-top: 1em;
 }
 
 .check-collection .collection-name {
@@ -82,13 +83,13 @@ header .logo img {
 }
 
 .check-collection .collection-name:focus {
-  border-color: #8bcaca;
+  border-color: #7fbebe;
   outline: 0;
 }
 
 .check-collection button {
   border-radius: 6px;
-  background-color: darkcyan;
+  background-color: #007e7e;
   border: 0 solid transparent;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -101,7 +102,7 @@ header .logo img {
 }
 
 .check-collection button:hover {
-  background-color: #007e7e;
+  background-color: #005858;
 }
 
 .check-collection button:focus {
