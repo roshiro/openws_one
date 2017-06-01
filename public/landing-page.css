@@ -1,3 +1,23 @@
+input::-webkit-input-placeholder {
+  color: lightgrey !important;
+  font-weight: 100;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+  color: lightgrey !important;
+  font-weight: 100;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+  color: lightgrey !important;
+  font-weight: 100;
+}
+
+input:-ms-input-placeholder {
+  color: lightgrey !important;
+  font-weight: 100;
+}
+
 header {
   /*background: linear-gradient(195deg,#00b7ca 0,#008997 100%);*/
   background: linear-gradient(195deg,rgba(50,185,218,.65) 0,#32b9da 100%);
@@ -9,13 +29,13 @@ header {
 }
 
 header .container {
-  padding-top: 5em;
+  padding-top: 4em;
 }
 
 header h1.title {
   font-size: 1.5em;
   margin-top: 0;
-  margin-bottom: 1em;
+  margin-bottom: 0.2em;
 }
 
 header .sub-title {
@@ -39,9 +59,58 @@ header .sub-title span {
 }
 
 header .logo img {
-  width: 3em;
+  width: 2.3em;
   position: absolute;
   margin-top: 26px;
+}
+
+.check-collection {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  margin: auto;
+  margin-top: 1em;
+}
+
+.check-collection .collection-name {
+  border-radius: 6px;
+  border: 2px solid #ecf0f1;
+  font-size: 15px;
+  padding: 7px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  text-align: center;
+}
+
+.check-collection .collection-name:focus {
+  border-color: #7fbebe;
+  outline: 0;
+}
+
+.check-collection button {
+  border-radius: 6px;
+  background-color: #007e7e;
+  border: 0 solid transparent;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  color: white;
+  font-size: 15px;
+  padding: 7px;
+  position: relative;
+  height: 37px;
+  cursor: pointer;
+}
+
+.check-collection button:hover {
+  background-color: #005858;
+}
+
+.check-collection button:focus {
+  outline: 0;
+}
+
+.check-collection button:active {
+  background-color: #007171;
 }
 
 #terminal {
