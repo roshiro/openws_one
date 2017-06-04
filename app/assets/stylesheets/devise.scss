@@ -1,0 +1,16 @@
+.session-new {
+  .column {
+    margin-top: 5%;
+    max-width: 500px;
+
+    #user_remember_me {
+      display: inline-block;
+      top: 3px;
+      position: relative;
+    }
+
+    label[for='user_remember_me'] {
+      display: inline;
+    }
+  }
+}

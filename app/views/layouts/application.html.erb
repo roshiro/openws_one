@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class="ui container">
+    <%= yield %>
+  </div>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 <%= javascript_include_tag *webpack_asset_paths("application") %>
 </body>
 </html>

@@ -1,0 +1,40 @@
+<div class="session-new ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui image header">
+      <img src="/static-images/logo.svg" class="image">
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+
+    <div class='ui stacked segment'>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'ui large form' }) do |f| %>
+        <div class="field">
+          <div class="ui left icon input">
+            <%= f.email_field :email, autofocus: true, placeholder: "Email address" %>
+            <i class="user icon"></i>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="ui left icon input">
+            <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
+            <i class="lock icon"></i>
+          </div>
+        </div>
+
+        <% if devise_mapping.rememberable? -%>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end -%>
+
+        <div class="actions">
+          <%= f.submit "Log in" %>
+        </div>
+      <% end %>
+    </div>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

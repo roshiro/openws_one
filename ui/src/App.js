@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import jQuery from 'jquery';
-import { Image } from 'semantic-ui-react';
+import { Image, Button, Icon } from 'semantic-ui-react';
 import './App.scss'
 
 class App extends Component {
@@ -76,6 +76,7 @@ class App extends Component {
             </Link>
             <div className="right menu">
               <a className="ui item" id='signout-link' onClick={ this.signOutHandler.bind(this) }>
+                <Icon name='sign out'/>
                 Logout
               </a>
             </div>
