@@ -68,6 +68,10 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   scope '/api' do
+    namespace :apps do
+      resources :collection_items, path: ':app_name/collections/:collection_name', only: [:create, :update, :show, :destroy]
+    end
+
     match 'collections/:collection_name', to: 'general_documents#create', via: [:post]
     match 'collections/:collection_name', to: 'general_documents#show', via: [:get]
     match 'collections/:collection_name/:id', to: 'general_documents#destroy_by_id', via: [:delete]
